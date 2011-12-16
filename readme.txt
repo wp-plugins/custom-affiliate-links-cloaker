@@ -20,4 +20,4 @@ Stable tag: 0.123
 
 == Screenshots ==
 
-screenshot-1.png
+1. **options page**
