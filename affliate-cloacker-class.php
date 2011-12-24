@@ -90,11 +90,12 @@ if (!class_exists("wp_affliate_cloacker")):
 			foreach ($links as $link):
 			
 				$OriginalUrl = url_shorten($link['OriginalUrl']);
-				$NewUrl = esc_url($link['NewUrl'],array('http'));
+				
+				$NewUrl = esc_url_raw($link['NewUrl'],array('http'));
+				
 				$Priority = floatval($link['Priority']);
 				
-				$result = wp_affliate_cloacker::insert_to_table($OriginalUrl,
-				$NewUrl, $Priority);
+				$result = wp_affliate_cloacker::insert_to_table($OriginalUrl, $NewUrl, $Priority);
 				 
 				if ($print):
 					

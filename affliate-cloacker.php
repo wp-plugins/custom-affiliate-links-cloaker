@@ -76,7 +76,7 @@ function wp_affliate_cloacker_install()
 		 id int(11) NOT NULL AUTO_INCREMENT,
 		 OriginalUrl varchar(500) COLLATE utf8_unicode_ci NOT NULL,
 		 NewUrl varchar(500) COLLATE utf8_unicode_ci NOT NULL,
-		 priority decimal(10,0) NOT NULL,
+		 priority decimal(5,5) NOT NULL,
 		 PRIMARY KEY (id)
 		) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		";
