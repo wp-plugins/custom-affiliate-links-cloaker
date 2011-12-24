@@ -5,13 +5,15 @@ Donate link: http://ahmadalinat.com
 Tags: wordpress,Custom Affiliate Links Cloaker
 Requires at least: 3.0.0
 Tested up to: 3.2
-Stable tag: 0.124
+Stable tag: 1.1
  
  This plugin gathers link information via web service and cloaks affiliate links on page
 
 == Description ==
  
- This plugin gathers link information via web service and cloaks affiliate links on page
+ This plugin gathers link information via web service and cloaks affiliate links on page.
+ 
+ Note: you need to set up your own webservice before using this plugin. 
 
 == Installation ==
 
