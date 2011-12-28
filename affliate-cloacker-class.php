@@ -77,6 +77,14 @@ if (!class_exists("wp_affliate_cloacker")):
 			return $wpdb->get_var("select count(*) from {$table}");
 			
 		}
+		
+		static function shorten_url($url)
+		{
+			$url = parse_url($url);
+			$url = str_replace('www.', '', $url['host']);
+			
+			return $url;
+		}
 		static function do_sync($print = true)
 		{
 			
@@ -89,8 +97,7 @@ if (!class_exists("wp_affliate_cloacker")):
 			
 			foreach ($links as $link):
 			
-				$OriginalUrl = parse_url($link['OriginalUrl']);
-				$OriginalUrl = str_replace('www.', '', $OriginalUrl['host']);
+				$OriginalUrl = wp_affliate_cloacker::shorten_url($link['OriginalUrl']);
 				
 				$NewUrl = esc_url_raw($link['NewUrl'] , array('http', 'https'));
 				
@@ -226,7 +233,7 @@ if (!class_exists("wp_affliate_cloacker")):
 		{
 			
 			$href = $url->getAttribute("href");
-			$short_url = url_shorten($href);
+			$short_url = wp_affliate_cloacker::shorten_url($href);
 			
 			return $short_url;
 		}
