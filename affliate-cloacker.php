@@ -83,6 +83,14 @@ function wp_affliate_cloacker_install()
 		
 	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 	dbDelta($sql);
+	
+	// add new rule to robots.txt
+	// Disallow: /out/
+		
+	// $filename = 'robots.txt';
+	// $robotstxt = file_get_contents($filename);
+	// file_put_contents($filename, $robotstxt."\n".'Disallow: /out/');
+
 }
 	
 	
@@ -98,6 +106,9 @@ function wp_affliate_cloacker_remove()
 	delete_option("aff_cloacker_use_in_widget");
 	
 	wp_clear_scheduled_hook('wp_affliate_cron_event');
+	
+	// remove row from robots.txt
+	// Disallow: /out/	
 }
 
 
