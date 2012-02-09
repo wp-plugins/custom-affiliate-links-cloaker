@@ -35,7 +35,8 @@ require_once("affliate-cloacker-class.php");
  * filters
  */
 if (get_option("aff_cloacker_use_in_content"))
-	add_filter( 'the_content', array('wp_affliate_cloacker','the_content') ) ;
+	add_filter( 'the_content', 	array('wp_affliate_cloacker','the_content') ) ;
+	add_filter( 'the_meta', 	array('wp_affliate_cloacker','the_content') ) ;
 
 if (get_option("aff_cloacker_use_in_rss")):
 	add_filter( 'the_content_rss', array('wp_affliate_cloacker','the_content') ) ;
