@@ -3,7 +3,7 @@
 Plugin Name:   Custom Affiliate Links Cloaker
 Plugin URI: http://wordpress.org
 Description:  This plugin gathers link information via web service and cloaks affiliate links on page
-Version: 1.2
+Version: 1.1
 Author: Ahmad Alinat
 Author URI: http://wordpress.org
 License: Free
@@ -35,7 +35,8 @@ require_once("affliate-cloacker-class.php");
  * filters
  */
 if (get_option("aff_cloacker_use_in_content"))
-	add_filter( 'the_content', array('wp_affliate_cloacker','the_content') ) ;
+	add_filter( 'the_content', 	array('wp_affliate_cloacker','the_content') ) ;
+	add_filter( 'the_meta', 	array('wp_affliate_cloacker','the_content') ) ;
 
 if (get_option("aff_cloacker_use_in_rss")):
 	add_filter( 'the_content_rss', array('wp_affliate_cloacker','the_content') ) ;
@@ -83,6 +84,14 @@ function wp_affliate_cloacker_install()
 		
 	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 	dbDelta($sql);
+	
+	// add new rule to robots.txt
+	// Disallow: /out/
+		
+	// $filename = 'robots.txt';
+	// $robotstxt = file_get_contents($filename);
+	// file_put_contents($filename, $robotstxt."\n".'Disallow: /out/');
+
 }
 	
 	
@@ -98,6 +107,9 @@ function wp_affliate_cloacker_remove()
 	delete_option("aff_cloacker_use_in_widget");
 	
 	wp_clear_scheduled_hook('wp_affliate_cron_event');
+	
+	// remove row from robots.txt
+	// Disallow: /out/	
 }
 
 
