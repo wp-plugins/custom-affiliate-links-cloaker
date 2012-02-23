@@ -77,14 +77,6 @@ if (!class_exists("wp_affliate_cloacker")):
 			return $wpdb->get_var("select count(*) from {$table}");
 			
 		}
-		
-		static function shorten_url($url)
-		{
-			$url = parse_url($url);
-			$url = str_replace('www.', '', $url['host']);
-			
-			return $url;
-		}
 		static function do_sync($print = true)
 		{
 			
@@ -97,7 +89,8 @@ if (!class_exists("wp_affliate_cloacker")):
 			
 			foreach ($links as $link):
 			
-				$OriginalUrl = wp_affliate_cloacker::shorten_url($link['OriginalUrl']);
+				$OriginalUrl = parse_url($link['OriginalUrl']);
+				$OriginalUrl = str_replace('www.', '', $OriginalUrl['host']);
 				
 				$NewUrl = esc_url_raw($link['NewUrl'] , array('http', 'https'));
 				
@@ -201,15 +194,23 @@ if (!class_exists("wp_affliate_cloacker")):
 			
 			return in_array(wp_affliate_cloacker::NO_CHANGE_CLASS, $cls);
 		}
-		static function set_redirect_url($home,$url)
+		static function set_redirect_url($home = null, $url)
 		{
 			
+			if(!$home)
+				$home = get_option("home");
+				
+			$type = gettype($url);
 			$short_url = wp_affliate_cloacker::get_short_url($url);
 			
 			//builds new url
 			$newurl = trailingslashit($home)."out/".$short_url;
 			
-			$url->setAttribute("href", $newurl);
+			if($type == 'object') 
+				$url->setAttribute("href", $newurl);
+			else 
+				return $newurl; 
+			
 		}
 		static function get_affliate_links()
 		{
@@ -231,9 +232,14 @@ if (!class_exists("wp_affliate_cloacker")):
 		}
 		static function get_short_url($url)
 		{
-			
-			$href = $url->getAttribute("href");
-			$short_url = wp_affliate_cloacker::shorten_url($href);
+			$type = gettype($url);
+			if($type == 'object') 
+				$href = $url->getAttribute("href");
+			else 
+				$href = $url; 
+				
+			$href = str_replace('https', 'http', $href);
+			$short_url = url_shorten($href);
 			
 			return $short_url;
 		}
@@ -380,6 +386,12 @@ if (!class_exists("wp_affliate_cloacker")):
 	        
 	        if (!$res) return FALSE;
 	        return $dom;
+		}
+		
+		function the_test($test)
+		{
+		
+			echo 'foo' . $test; die();
 		}
 	}
 endif;
