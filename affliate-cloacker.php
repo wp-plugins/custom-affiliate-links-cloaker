@@ -5,7 +5,7 @@ Plugin URI: http://wordpress.org
 Description:  This plugin gathers link information via web service and cloaks affiliate links on page
 Version: 1.2.5
 Author: Ahmad Alinat
-Author URI: http://wordpress.org
+Author URI: http://www.sosasu.fi
 License: Free
 */
 
