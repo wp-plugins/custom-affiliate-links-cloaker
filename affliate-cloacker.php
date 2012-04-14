@@ -2,7 +2,7 @@
 /*
 Plugin Name:   Custom Affiliate Links Cloaker
 Plugin URI: http://wordpress.org/extend/plugins/custom-affiliate-links-cloaker/
-Description:  This plugin gathers link information via web service and cloaks affiliate links on page
+Description:  This plugin gathers link information via web service and cloaks affiliate links on page to use domain.com/out/link-domain.com
 Version: 1.4
 Author: Ahmad Alinat
 Author URI: http://wordpress.org/extend/plugins/custom-affiliate-links-cloaker/
