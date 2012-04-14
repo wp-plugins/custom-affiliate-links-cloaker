@@ -2,7 +2,7 @@
 
 Contributors: Ahmad Alinat,Mousewel
 Donate link: http://ahmadalinat.com
-Tags: wordpress,Custom Affiliate Links Cloaker
+Tags: wordpress, Cloacking, Custom Affiliate Links Cloacker
 Requires at least: 3.0.0
 Tested up to: 3.2
 Stable tag: 1.4
