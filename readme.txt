@@ -1,7 +1,7 @@
 === Custom Affiliate Links Cloaker ===
 
-Contributors: Ahmad Alinat,Mousewel
-Donate link: http://ahmadalinat.com
+Contributors: Ahmad Alinat, Mousewell
+Donate link: http://www.sosasu.fi
 Tags: wordpress, Cloacking, Custom Affiliate Links Cloacker
 Requires at least: 3.0.0
 Tested up to: 3.2
