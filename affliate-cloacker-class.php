@@ -239,7 +239,14 @@ if (!class_exists("wp_affliate_cloacker")):
 				$href = $url; 
 				
 			$href = str_replace('https', 'http', $href);
-			$short_url = url_shorten($href);
+			
+			$url = parse_url($href);
+			
+			if( substr($url['host'], 0, 4) == 'www.')
+				$short_url = substr($url['host'], 4);
+			else
+				$short_url = $url['host'];
+			
 			
 			return $short_url;
 		}
