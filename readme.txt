@@ -23,3 +23,12 @@ Stable tag: 1.4.2
 == Screenshots ==
 
 1. **options page**
+
+== Changelog ==
+ 
+= 1.4.2 =
+* Fixed bug with redirection and output buffering
+ 
+= 1.0 =
+* First version out
+ 
