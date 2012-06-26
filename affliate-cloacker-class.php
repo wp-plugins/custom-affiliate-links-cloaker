@@ -272,7 +272,10 @@ if (!class_exists("wp_affliate_cloacker")):
 	
 			$home = get_option("home");
 			
-			$urls = $dom->getElementsByTagName("a");
+			if(is_object($dom))
+				$urls = $dom->getElementsByTagName("a");
+			else 
+				return $content;
 			
 			if ($urls->length > 0):
 			
