@@ -5,7 +5,7 @@ Donate link: http://www.sosasu.fi
 Tags: wordpress, Cloacking, Custom Affiliate Links Cloacker
 Requires at least: 3.0.0
 Tested up to: 3.3.2
-Stable tag: 1.4.2.1
+Stable tag: 1.4.3
  
  This plugin gathers link information via web service and cloaks affiliate links on page
 
