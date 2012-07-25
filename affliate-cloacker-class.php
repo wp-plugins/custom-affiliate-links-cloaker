@@ -37,9 +37,17 @@ if (!class_exists("wp_affliate_cloacker")):
 		static function get_webservice_data($print = true)
 		{
 			$sync_url = get_option("aff_cloacker_webservice_url");
-			$data = wp_remote_get($sync_url);
 			
+			$data = wp_remote_get($sync_url);
 			$data = $data['body'];
+			
+			if(!$data or trim($data) == '')
+			{
+				
+				// try alternative method, ie. loopia.se blocks file_get_contents command
+				
+				$data = wp_affliate_cloacker::alternative_method_get_webservice_data($sync_url);
+			}
 			
 			if (!$data && $print):
 			
@@ -56,6 +64,54 @@ if (!class_exists("wp_affliate_cloacker")):
 			endif;
 			
 			return $data;
+		}
+		
+		static function alternative_method_get_webservice_data($url)
+		{
+			
+			if (preg_match('/^([a-z]+):\/\/([a-z0-9-.]+)(\/.*$)/i',
+					$url, $matches)) {
+				$protocol = strtolower($matches[1]);
+				$host = $matches[2];
+				$path = $matches[3];
+			} else {
+				// Bad url-format
+				return FALSE;
+			}
+			
+			if ($protocol == "http") {
+				$socket = fsockopen($host, 80);
+			} else {
+				// Bad protocol
+				return FALSE;
+			}
+			
+			if (!$socket) {
+				// Error creating socket
+				return FALSE;
+			}
+			
+			$request = "GET $path HTTP/1.0\r\nHost: $host\r\n\r\n";
+			$len_written = fwrite($socket, $request);
+			
+			if ($len_written === FALSE || $len_written != strlen($request)) {
+				// Error sending request
+				return FALSE;
+			}
+			
+			$response = "";
+			while (!feof($socket) &&
+					($buf = fread($socket, 4096)) !== FALSE) {
+				$response .= $buf;
+			}
+			
+			if ($buf === FALSE) {
+				// Error reading response
+				return FALSE;
+			}
+			
+			$end_of_header = strpos($response, "\r\n\r\n");
+			return substr($response, $end_of_header + 4);
 		}
 		/*
 		 * clear table
